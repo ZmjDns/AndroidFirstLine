@@ -1,4 +1,8 @@
-apply plugin: 'com.android.application'
+if (IsFragmentModel.toBoolean()){
+    apply plugin: 'com.android.library'
+}else {
+    apply plugin: 'com.android.application'
+}
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -7,13 +11,13 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.zmj.androidfirstline"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -22,7 +26,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets{
+        main{
+            if (IsFragmentModel.toBoolean()){//作为一个库
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+                java{
+                    exclude('debug/*')
+                    exclude('*module')
+                }
+            }else {//作为一个application
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            }
+        }
+    }
 }
+
+
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -30,14 +50,6 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-
-    if (IsFragmentModel.toBoolean()){
-        api project(path: ':FragmentModel')
-    }
-
-    implementation 'com.zmj:premissionlib:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
