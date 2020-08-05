@@ -23,7 +23,13 @@ fun main(){
 
     //jiHe()
 
-    lambdaTest()
+    //lambdaTest()
+
+//    standerWith()
+
+//    standerRun()
+
+    standerApply()
 }
 
 fun jiHe(){
@@ -77,5 +83,57 @@ fun lambdaTest(){
         println()
     }
 
+}
+
+//标准函数，任何kotlin代码都可以自由的调用标准函数
+//with 能够直接调用 接收一个对象和一个lambda表达式，
+// 并在lambda表达式中提供该对象的上下文（即在lambda表达式中对这个对象进行操作），
+// 最后一行作为返回值返回
+fun standerWith(){
+    val list = listOf("Apple","Banana","Orange","Pear","Grape","Watermelon")
+
+
+    val result = with(StringBuilder()){
+        append("Start eat fruits")
+        for (fruit in list){
+            append(fruit).append("\n")
+        }
+        append("eat All fruits")
+        toString()
+    }
+
+    println(result)
+}
+
+//run 通过对象调用 接收一个lambda表达式，在lambda表达式中提供该对象的上下文，最后一行作为返回值返回
+fun standerRun(){
+    val list = listOf("Apple","Banana","Orange","Pear","Grape","Watermelon")
+    val result = StringBuilder().run {
+        append("Start eat fruits")
+        for (fruit in list){
+            append(fruit).append("\n")
+        }
+        append("eat all fruits")
+        toString()
+    }
+
+    println(result)
+}
+
+//apply  通过对象调用  只接受一个lambda表达式，
+// 在lambda表达式中提供调用对象的上下文，
+// 没有返回值，最终返回对象本身
+fun standerApply(){
+    val list = listOf("Apple","Banana","Orange","Pear","Grape","Watermelon")
+
+    val result = StringBuilder().apply {
+        append("Start eat fruits")
+        list.forEach {
+            append(it).append("\n")
+        }
+        append("eat all fruits")
+    }
+
+    println(result.toString())
 }
 
