@@ -1,3 +1,4 @@
+include ':FragmentBestPractice'
 include ':FragmentModel'
 include ':app'
 rootProject.name = "AndroidFirstLine"
