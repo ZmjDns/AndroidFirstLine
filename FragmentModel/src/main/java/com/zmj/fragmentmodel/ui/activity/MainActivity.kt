@@ -13,18 +13,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        openAnother.setOnClickListener {
+        /*openAnother.setOnClickListener {
             switchFragment(AnotherFragment())
         }
 
-        switchFragment(RightFragment())
+        switchFragment(RightFragment())*/
     }
 
-    fun switchFragment(fragment: Fragment){
+    /*fun switchFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.rightCon,fragment)
         transaction.addToBackStack(null)
         transaction.commit()
-    }
+    }*/
 }
