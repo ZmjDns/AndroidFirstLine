@@ -29,6 +29,5 @@ class ForceOffLineReceiver: BroadcastReceiver() {
                 }
             }
         }.show()
-
     }
 }
