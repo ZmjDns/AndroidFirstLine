@@ -1,8 +1,13 @@
 package com.zmj.androidfirstline.checpter7
 
+import android.content.ContentValues
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
+import com.zmj.androidfirstline.App
 import com.zmj.androidfirstline.R
 import kotlinx.android.synthetic.main.act_write_file.*
 import java.io.BufferedReader
@@ -36,10 +41,12 @@ class WriteFileAct: AppCompatActivity() {
         }
 
         et_text.setText(readTextFromFile())
+
+        dataBase()
     }
 
     private fun readTextFromFile(): String{
-        val content = StringBuilder()
+        /*val content = StringBuilder()
 
         val input =  openFileInput("personalFile")
         val reader = BufferedReader(InputStreamReader(input))
@@ -49,18 +56,22 @@ class WriteFileAct: AppCompatActivity() {
                 content.append(it)
             }
         }
-        return content.toString()
+        return content.toString()*/
+
+        return readDataFromFile()
     }
 
     private fun saveTextToFile(text: String) {
-        //默认存储到/data/data/<package name>/file/
+        /*//默认存储到/data/data/<package name>/file/
         val outPut = openFileOutput("personalFile", Context.MODE_APPEND)
         val writer = BufferedWriter(OutputStreamWriter(outPut))
 
         //use函数保证在Lambda表达式中的代码全部执行完之后自动将外层的流关闭
         writer.use {
             it.write(text)
-        }
+        }*/
+
+        writeData2File(text)
     }
 
     fun dataBase(){
