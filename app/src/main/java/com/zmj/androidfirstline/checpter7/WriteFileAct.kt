@@ -63,6 +63,71 @@ class WriteFileAct: AppCompatActivity() {
         }
     }
 
+    fun dataBase(){
+        val db = DataBaseHelper()
+        db.writableDatabase
+
+        //insertData()
+        //updateData()
+
+        queryData()
+    }
+
+    fun insertData(){
+        val db = DataBaseHelper().writableDatabase
+        val contentValues1 = ContentValues().apply {
+            put("name","The Da Vinci Code")
+            put("author","TDVC")
+            put("pages",1200)
+            put("price",19.95)
+        }
+        db.insert("Book",null,contentValues1)
+
+        val contentValues2 = ContentValues().apply {
+            put("name","The Lost Symbol")
+            put("author","TLS")
+            put("pages",960)
+            put("price",20)
+        }
+        db.insert("Book",null,contentValues2)
+    }
+
+    fun updateData(){
+        val db = DataBaseHelper().writableDatabase
+        val contentValues = ContentValues().apply {
+            put("price",100)
+        }
+        db.update("Book",contentValues,"name=?", arrayOf("The Lost Symbol"))
+    }
+
+    fun queryData(){
+        val db = DataBaseHelper().readableDatabase
+        val cursor = db.query("Book", null,null,null,null,null,null)
+        /*val cursor = db.rawQuery("select * from Book",null)
+        val count = cursor.count
+        for (position in 0 until count){
+            cursor.move(position)
+            val name = cursor.getString(cursor.getColumnIndex("name"))
+            val price = cursor.getFloat(cursor.getColumnIndex("author"))
+            Log.d("WriteFileAct","name: $name  price: $price")
+        }*/
+        do {
+            val name = cursor.getString(cursor.getColumnIndex("name"))
+            val price = cursor.getFloat(cursor.getColumnIndex("author"))
+            Log.d("WriteFileAct","name: $name  price: $price")
+        }while (cursor.moveToNext())
+
+        cursor.close()
+    }
+
+    fun sharedPreferenceExt(){
+        getSharedPreferences("aa",Context.MODE_PRIVATE).open {
+            putString("aaaa","sad")
+            putInt("int",5555)
+        }
+
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         val text = et_text.text.toString()
