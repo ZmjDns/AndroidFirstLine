@@ -3,13 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zmj.androidfirstline">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver
+            android:name=".broadcast.BootCompleteReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+
+        </receiver>
+        <receiver android:name=".broadcast.MyBroadCastReceiver" >
+            <intent-filter android:priority="100">
+                <action android:name="com.zmj.androidfirstline.MY_BROSDCAST"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".broadcast.AnotherBoardCast" >
+            <intent-filter>
+                <action android:name="com.zmj.androidfirstline.MY_BROSDCAST"/>
+            </intent-filter>
+        </receiver>
+
+
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,27 +45,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondAct"
-            android:launchMode="singleInstance"
-            android:label="secondAct">
+        <activity
+            android:name=".SecondAct"
+            android:label="secondAct"
+            android:launchMode="singleInstance">
             <intent-filter>
-                <action android:name="com.zmj.androidfirstline.ACTION_START"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="com.zmj.androidfirstline.MY_CATEGORY"/>
+                <action android:name="com.zmj.androidfirstline.ACTION_START" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.zmj.androidfirstline.MY_CATEGORY" />
             </intent-filter>
         </activity>
-        <activity android:name=".ThreadBrowserAct"
+        <activity
+            android:name=".ThreadBrowserAct"
             android:label="thridAct">
             <intent-filter tools:ignore="AppLinkUrlError">
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:scheme="https"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name=".DialogAct"
+        <activity
+            android:name=".DialogAct"
             android:theme="@style/Theme.AppCompat.Dialog">
 
         </activity>
+        <activity android:name=".ui.ChatAct" />
+        <activity android:name=".broadcast.LoginAct" >
+        </activity>
+        <activity android:name=".checpter7.WriteFileAct" />
+        <activity android:name=".notification.NotificationAct" />
+        <activity android:name=".notification.PendingAct" />
+
     </application>
 
 </manifest>
