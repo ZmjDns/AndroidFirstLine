@@ -36,7 +36,15 @@
             </intent-filter>
         </receiver>
 
-
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="XXXXXXXXXX"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -78,7 +86,7 @@
         <activity android:name=".checpter7.WriteFileAct" />
         <activity android:name=".notification.NotificationAct" />
         <activity android:name=".notification.PendingAct" />
-
+        <activity android:name=".notification.CameraAct" />
     </application>
 
 </manifest>
