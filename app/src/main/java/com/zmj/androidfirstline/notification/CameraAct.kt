@@ -26,6 +26,7 @@ import java.io.File
 class CameraAct: AppCompatActivity() {
 
     val takePhoto = 1
+    val openGallery = 2
     private lateinit var imageUri: Uri
     private lateinit var outputImage: File
 
@@ -35,6 +36,10 @@ class CameraAct: AppCompatActivity() {
 
         openCamera.setOnClickListener {
             prepareTakePhoto()
+        }
+
+        openAlbum.setOnClickListener {
+            prepareOpenGallery()
         }
 
     }
@@ -57,6 +62,13 @@ class CameraAct: AppCompatActivity() {
         startActivityForResult(intent,takePhoto)
     }
 
+    private fun prepareOpenGallery(){
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.type = "image/*"
+        startActivityForResult(intent,openGallery)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
@@ -67,8 +79,21 @@ class CameraAct: AppCompatActivity() {
                     image.setImageBitmap(rotateIfRequired(bitmap))
                 }
             }
+            openGallery -> {
+                if (resultCode == Activity.RESULT_OK && data != null){
+                    data.data?.let { uri ->
+                        val bitmap = getBitmapFromUri(uri)
+                        image.setImageBitmap(bitmap)
+                    }
+                }
+            }
         }
     }
+
+    private fun getBitmapFromUri(uri: Uri) = applicationContext.contentResolver
+        .openAssetFileDescriptor(uri,"r")?.use {
+            BitmapFactory.decodeFileDescriptor(it.fileDescriptor)
+        }
 
 
     //图片角度矫正
