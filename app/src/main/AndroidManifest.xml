@@ -87,6 +87,8 @@
         <activity android:name=".notification.NotificationAct" />
         <activity android:name=".notification.PendingAct" />
         <activity android:name=".notification.CameraAct" />
+        <activity android:name=".notification.MediaPlayerAct" />
+        <activity android:name=".notification.VideoPlayerAct" />
     </application>
 
 </manifest>
