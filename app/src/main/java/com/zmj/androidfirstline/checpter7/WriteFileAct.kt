@@ -2,10 +2,16 @@ package com.zmj.androidfirstline.checpter7
 
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
+import android.os.storage.StorageManager
+import android.os.storage.StorageManager.ACTION_MANAGE_STORAGE
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import com.zmj.androidfirstline.App
 import com.zmj.androidfirstline.R
@@ -42,8 +48,44 @@ class WriteFileAct: AppCompatActivity() {
 
         et_text.setText(readTextFromFile())
 
-        dataBase()
+        //dataBase()
+        externalStorageVolumes()
     }
+
+    fun externalStorageVolumes(){
+        val externalStorageList = ContextCompat.getExternalFilesDirs(App.appContext,null)
+        //返回数组中第一个元素被视为主外部存储卷，除非该卷已满或不可使用，否则请使用该卷
+        //      /storage/emulated/0/Android/data/com.zmj.androidfirstline/files
+        val mainContainerStorage = externalStorageList[0]
+        Log.d("WriteFileAct","getExternalFilesDirs[0]： ${mainContainerStorage.path}")
+
+        val cacheDirList = ContextCompat.getExternalCacheDirs(App.appContext)
+        val cacheDir = cacheDirList[0]
+        Log.d("WriteFileAct","getExternalCacheDirs[0]： ${cacheDir.path}")
+
+        val contextCacheDir = App.appContext.cacheDir
+        Log.d("WriteFileAct","contextCacheDir： ${contextCacheDir.path}")
+
+        val contextFilesDir = App.appContext.filesDir
+        Log.d("WriteFileAct","contextFilesDir： ${contextFilesDir.path}")
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAvailableSizeFromSystem(){
+        val NUM_BYTES_MEED_FOR_MY_APP = 1024 * 1024 * 10L
+
+        val storageManager = App.appContext.getSystemService(Context.STORAGE_SERVICE) as StorageManager
+        val specrifiedInternalDirUuid = storageManager.getUuidForPath(filesDir)
+        val availabBytes = storageManager.getAllocatableBytes(specrifiedInternalDirUuid)
+        if (availabBytes >= NUM_BYTES_MEED_FOR_MY_APP){
+            storageManager.allocateBytes(specrifiedInternalDirUuid,NUM_BYTES_MEED_FOR_MY_APP)
+        }else{
+            val storageIntent = Intent().apply {
+                action = ACTION_MANAGE_STORAGE
+            }
+        }
+    }
+
 
     private fun readTextFromFile(): String{
         /*val content = StringBuilder()
@@ -73,6 +115,23 @@ class WriteFileAct: AppCompatActivity() {
 
         writeData2File(text)
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     fun dataBase(){
         val db = DataBaseHelper()
