@@ -23,13 +23,43 @@ class SimpleData<out T/*,R*/>(val data: T/*,private var ss:R*/){
 }
 
 fun main() {
-    val student = Student("Tom",15)
+    /*val student = Student("Tom",15)
     val teacher = Teacher("Kluz",36)
     val data = SimpleData<Person>(student)
     handleMyData(data)
-    val studentData = data.get()
+    val studentData = data.get()*/
+
+
+    nibian()
 }
 fun handleMyData(data: SimpleData<Person>){
     val personData = data.get()
 
+}
+
+interface Transform<in T>{
+    fun transform(t: T): String
+
+    //违反逆变规则方法
+    //fun transform(name: String,age: Int): @UnsafeVariance T
+}
+
+fun nibian(){
+    val trans = object : Transform<Person>{
+        override fun transform(t: Person): String {
+            return "${t.name}   ${t.age}"
+        }
+
+//        override fun transform(name: String, age: Int): Person {
+//            return Teacher(name, age)
+//        }
+    }
+    handleTransform(trans)
+}
+
+fun handleTransform(trans: Transform<Student>){
+    val student = Student("Tom",20)
+    val result = trans.transform(student)
+
+//    val result2 = trans.transform("Tom",19)
 }
