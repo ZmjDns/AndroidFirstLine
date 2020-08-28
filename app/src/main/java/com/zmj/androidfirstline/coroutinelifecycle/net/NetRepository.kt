@@ -23,7 +23,7 @@ object NetRepository {
 
 
 
-    suspend fun <T>Call<T>.call(): T{
+    private suspend fun <T>Call<T>.call(): T{
         return suspendCoroutine {continuation ->
             enqueue(object : Callback<T>{
                 override fun onResponse(call: Call<T>, response: Response<T>) {

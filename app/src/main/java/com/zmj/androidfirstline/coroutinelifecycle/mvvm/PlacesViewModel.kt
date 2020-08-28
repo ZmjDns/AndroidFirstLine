@@ -22,7 +22,8 @@ class PlacesViewModel: ViewModel() {
         placeName.value = query
     }
     val observablePlaces = Transformations.switchMap(placeName){query ->
-        Repository.getPlaces(query)
+        //Repository.getPlaces(query)
+        Repository.getReducePlaces(query)
     }
     var searchedPlaces = ArrayList<Place>()
 }
