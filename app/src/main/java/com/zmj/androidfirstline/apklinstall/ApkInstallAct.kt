@@ -61,6 +61,30 @@ class ApkInstallAct : AppCompatActivity(){
         }
     }
 
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checkAPIOInstallPermission(){
+        val canInstallApk = packageManager.canRequestPackageInstalls()
+        if (!canInstallApk){
+            val packageUri = Uri.parse("package:$packageName")
+            val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,packageUri)
+            startActivityForResult(intent,2020)
+        }else{
+            installPackages()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 2020 && resultCode == Activity.RESULT_OK){
+            showToast("Got install unknown apk resource permission")
+            installPackages()
+        }else{
+            showToast("you denied permission can not install apk")
+        }
+    }
+
     private fun installPackages() {
         val file = File(path)
         if (!file.exists()){
@@ -78,7 +102,7 @@ class ApkInstallAct : AppCompatActivity(){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                 val aa = packageManager.canRequestPackageInstalls()
                 if (!aa){
-                   showToast("can not install unknown apk source please setting")
+                    showToast("can not install unknown apk source please setting")
                     return
                 }
             }
@@ -92,21 +116,6 @@ class ApkInstallAct : AppCompatActivity(){
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun checkAPIOInstallPermission(){
-        val packageUri = Uri.parse("package:$packageName")
-        val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,packageUri)
-        startActivityForResult(intent,2020)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 2020 && resultCode == Activity.RESULT_OK){
-            showToast("Got install unknown apk resource permission")
-        }else{
-            showToast("you denied permission can not install apk")
-        }
-    }
 
     private fun downLoadApk(){
         //App.appContext.externalCacheDir属于应用内部的dir，无需请求权限
