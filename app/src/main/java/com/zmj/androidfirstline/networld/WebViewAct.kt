@@ -29,9 +29,9 @@ class WebViewAct: AppCompatActivity() {
         webView.settings.javaScriptEnabled = true
         //当需要从一个网页跳转到另一个网页时，我们希望目标网页任然处于当前WebView中，而不是跳转到浏览器
         webView.webViewClient = WebViewClient()
-        webView.loadUrl("https:www.baidu.com")
+        webView.loadUrl("http://www.jbr720.com/putout/vrpano41/")
 
-        sendHttpUrlConnection()
+        //sendHttpUrlConnection()
 
         okhttp.setOnClickListener {
             startActivity(Intent(this,ActOkhttpTest::class.java))
