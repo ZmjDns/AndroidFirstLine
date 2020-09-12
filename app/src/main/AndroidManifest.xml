@@ -3,9 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zmj.androidfirstline">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 
     <application
         android:name=".App"
@@ -15,24 +20,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".service.MyService"
+            android:enabled="true"
+            android:exported="true"/>
+
         <receiver
             android:name=".broadcast.BootCompleteReceiver"
             android:enabled="true"
             android:exported="true">
-
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-
         </receiver>
-        <receiver android:name=".broadcast.MyBroadCastReceiver" >
+        <receiver android:name=".broadcast.MyBroadCastReceiver">
             <intent-filter android:priority="100">
-                <action android:name="com.zmj.androidfirstline.MY_BROSDCAST"/>
+                <action android:name="com.zmj.androidfirstline.MY_BROSDCAST" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".broadcast.AnotherBoardCast" >
+        <receiver android:name=".broadcast.AnotherBoardCast">
             <intent-filter>
-                <action android:name="com.zmj.androidfirstline.MY_BROSDCAST"/>
+                <action android:name="com.zmj.androidfirstline.MY_BROSDCAST" />
             </intent-filter>
         </receiver>
 
@@ -43,7 +51,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity android:name=".MainActivity">
@@ -77,18 +85,21 @@
         </activity>
         <activity
             android:name=".DialogAct"
-            android:theme="@style/Theme.AppCompat.Dialog">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
         <activity android:name=".ui.ChatAct" />
-        <activity android:name=".broadcast.LoginAct" >
-        </activity>
+        <activity android:name=".broadcast.LoginAct"></activity>
         <activity android:name=".checpter7.WriteFileAct" />
         <activity android:name=".notification.NotificationAct" />
         <activity android:name=".notification.PendingAct" />
         <activity android:name=".notification.CameraAct" />
         <activity android:name=".notification.MediaPlayerAct" />
         <activity android:name=".notification.VideoPlayerAct" />
+        <activity android:name=".service.AsyncThreadAct" />
+        <activity android:name=".apklinstall.ApkInstallAct" />
+        <activity android:name=".networld.WebViewAct" />
+        <activity android:name=".networld.ActOkhttpTest" />
+        <activity android:name=".coroutinelifecycle.mvvm.PlacesAct" />
+        <activity android:name=".selfdefView.SportsView" />
     </application>
 
 </manifest>
