@@ -34,6 +34,10 @@ class SecondAct: AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("SecondAct","onResume..........")
+    }
 
     override fun onBackPressed() {
         //super.onBackPressed()
