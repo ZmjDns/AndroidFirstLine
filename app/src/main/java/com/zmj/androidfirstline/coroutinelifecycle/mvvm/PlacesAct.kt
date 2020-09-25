@@ -5,12 +5,10 @@ import android.text.Editable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.observe
+import androidx.lifecycle.*
 import com.zmj.androidfirstline.R
 import kotlinx.android.synthetic.main.act_places.*
+import kotlinx.coroutines.launch
 
 /**
  * Author : Zmj
@@ -44,6 +42,18 @@ class PlacesAct: AppCompatActivity() {
         initPlaceObserver()
 
         initSearchEdit()
+
+        //直接在Act中开启协程
+        lifecycleScope.launch {
+
+        }
+    }
+
+    init {
+        //在act created之后调用
+        lifecycleScope.launchWhenCreated {
+
+        }
     }
 
     private fun initSearchEdit() {
