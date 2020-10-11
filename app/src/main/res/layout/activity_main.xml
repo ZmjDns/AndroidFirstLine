@@ -1,42 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/tv_hello"
-        android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="toNext"/>
-
-    <Button
-        android:id="@+id/btn_openBroser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="open bowser"/>
-
-    <Button
-        android:id="@+id/btn_sendAndGetData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sendAndGetData"/>
-
-    <Button
-        android:id="@+id/btn_openDialogAct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="openDialogAct"/>
+        <com.zmj.androidfirstline.ui.widget.TitleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="toNext"/>
+
+        <Button
+            android:id="@+id/btn_openBroser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="open bowser"/>
+
+        <Button
+            android:id="@+id/btn_sendAndGetData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sendAndGetData"/>
+
+        <Button
+            android:id="@+id/btn_openDialogAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="openDialogAct"/>
+
+        <Button
+            android:id="@+id/btn_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="chat"/>
+
+        <Button
+            android:id="@+id/btn_sendBoardCast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send boardcast"/>
+
+        <Button
+            android:id="@+id/forceOffline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="force offline"/>
+
+        <Button
+            android:id="@+id/chapter7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="chapter7"/>
+
+        <Button
+            android:id="@+id/notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="notification"/>
+        <Button
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="camera"/>
+
+        <Button
+            android:id="@+id/media"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="media"/>
+
+        <Button
+            android:id="@+id/video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="video"/>
+
+        <Button
+            android:id="@+id/service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="service"/>
+
+        <Button
+            android:id="@+id/install"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="install apk"/>
+
+        <Button
+            android:id="@+id/webView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="webView"/>
+
+        <Button
+            android:id="@+id/CoroutineWithLiveData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="CoroutineWithLiveData"/>
+
+        <Button
+            android:id="@+id/sportView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sportView"
+            android:textAllCaps="false"/>
+
+
+
+    </LinearLayout>
+</ScrollView>
